@@ -25,14 +25,14 @@ const ThankYou = () => {
         </svg>
         <h1 className="text-3xl sm:text-4xl font-bold mb-4 bg-gradient-to-r from-fine-green-400 to-fine-yellow-400 bg-clip-text text-transparent text-center">Thank You!</h1>
         <p className="text-base sm:text-lg mb-8 text-gray-300 text-center font-light">
-          Your responses have been submitted.<br />
-          <span className="text-fine-green-300">We appreciate your time and feedback!</span>
+          Suas respostas foram enviadas.<br />
+          <span className="text-fine-green-300">Agradecemos seu tempo e feedback!</span>
         </p>
         <Button
           onClick={handleReturn}
           className="bg-fine-green-600 hover:bg-fine-green-500 text-white font-medium text-base px-8 py-3 rounded-full shadow-none border border-fine-green-700 transition-all duration-200"
         >
-          Return
+          Retornar ao Início
         </Button>
       </div>
     </div>
