@@ -22,6 +22,10 @@ interface FormData {
   platformFeatures: string[];
   experienceRating: string;
   platformFeedback: string;
+  genderOther: string;
+  interestsOther: string;
+  platformFeaturesOther: string;
+  monthlyInvestmentOther: string;
   monthlyInvestment: string;
   interestLevel: string;
   usageFrequency: string;
@@ -44,6 +48,10 @@ const FinancialSurveyForm = () => {
     platformFeatures: [],
     experienceRating: '',
     platformFeedback: '',
+    genderOther: '',
+    interestsOther: '',
+    platformFeaturesOther: '',
+    monthlyInvestmentOther: '',
     monthlyInvestment: '',
     interestLevel: '',
     usageFrequency: '',
@@ -129,9 +137,9 @@ const FinancialSurveyForm = () => {
       case 4:
         return formData.interests.length > 0;
       case 5:
-        return formData.hasUsedApps !== '' && (formData.hasUsedApps === 'no' || formData.platformsUsed.trim() !== '');
+        return formData.hasUsedApps !== '' && (formData.hasUsedApps === 'Não' || formData.platformsUsed.trim() !== '');
       case 6:
-        if (formData.hasUsedApps === 'yes') {
+        if (formData.hasUsedApps === 'Sim') {
           return formData.platformFeatures.length > 0 && formData.experienceRating !== '' && formData.monthlyInvestment !== '';
         }
         return formData.monthlyInvestment !== '';
@@ -172,7 +180,7 @@ const FinancialSurveyForm = () => {
     if (validateCurrentStep()) {
       setLoading(true);
       try {
-        await fetch('https://market-research-m7vk.onrender.com/api/survey', {
+        await fetch('http://localhost:3001/api/survey', { // Altere aqui para o seu servidor local
           method: 'POST',
           body: JSON.stringify(formData),
           headers: { 'Content-Type': 'application/json' }
@@ -340,8 +348,8 @@ const FinancialSurveyForm = () => {
                       <Input
                         className="ml-2 h-10 text-base border-gray-600 bg-gray-800 text-white"
                         placeholder="Descreva"
-                        value={formData.platformFeedback || ''}
-                        onChange={e => updateFormData('platformFeedback', e.target.value)}
+                        value={formData.genderOther || ''}
+                        onChange={e => updateFormData('genderOther', e.target.value)}
                         style={{ width: 180 }}
                       />
                     )}
@@ -392,8 +400,8 @@ const FinancialSurveyForm = () => {
                     <Input
                       className="ml-2 h-10 text-base border-gray-600 bg-gray-800 text-white"
                       placeholder="Descreva"
-                      value={formData.platformFeedback || ''}
-                      onChange={e => updateFormData('platformFeedback', e.target.value)}
+                      value={formData.interestsOther || ''}
+                      onChange={e => updateFormData('interestsOther', e.target.value)}
                       style={{ width: 180 }}
                     />
                   )}
@@ -414,15 +422,15 @@ const FinancialSurveyForm = () => {
               className="space-y-3"
             >
               <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-800 transition-colors duration-200">
-                <RadioGroupItem value="yes" id="yes" className="border-2 border-fine-green-500 text-fine-green-500" />
-                <Label htmlFor="yes" className="text-base cursor-pointer text-gray-300">Sim</Label>
+                <RadioGroupItem value="Sim" id="hasUsedApps-yes" className="border-2 border-fine-green-500 text-fine-green-500" />
+                <Label htmlFor="hasUsedApps-yes" className="text-base cursor-pointer text-gray-300">Sim</Label>
               </div>
               <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-800 transition-colors duration-200">
-                <RadioGroupItem value="no" id="no" className="border-2 border-fine-green-500 text-fine-green-500" />
-                <Label htmlFor="no" className="text-base cursor-pointer text-gray-300">Não</Label>
+                <RadioGroupItem value="Não" id="hasUsedApps-no" className="border-2 border-fine-green-500 text-fine-green-500" />
+                <Label htmlFor="hasUsedApps-no" className="text-base cursor-pointer text-gray-300">Não</Label>
               </div>
             </RadioGroup>
-            {formData.hasUsedApps === 'yes' && (
+            {formData.hasUsedApps === 'Sim' && (
               <div className="space-y-4 animate-fade-in-up">
                 <Label htmlFor="platforms" className="text-lg font-medium text-gray-200">
                   Se sim, qual(is)?
@@ -442,7 +450,7 @@ const FinancialSurveyForm = () => {
       case 6:
         return (
           <div className="space-y-6 animate-fadein-smooth">
-            {formData.hasUsedApps === 'yes' && (
+            {formData.hasUsedApps === 'Sim' && (
               <>
                 <div className="space-y-4">
                   <Label className="text-lg font-medium text-gray-200">
@@ -470,8 +478,8 @@ const FinancialSurveyForm = () => {
                           <Input
                             className="ml-2 h-10 text-base border-gray-600 bg-gray-800 text-white"
                             placeholder="Descreva"
-                            value={formData.platformFeedback || ''}
-                            onChange={e => updateFormData('platformFeedback', e.target.value)}
+                            value={formData.platformFeaturesOther || ''}
+                            onChange={e => updateFormData('platformFeaturesOther', e.target.value)}
                             style={{ width: 180 }}
                           />
                         )}
@@ -536,8 +544,8 @@ const FinancialSurveyForm = () => {
                       <Input
                         className="ml-2 h-10 text-base border-gray-600 bg-gray-800 text-white"
                         placeholder="Descreva"
-                        value={formData.platformFeedback || ''}
-                        onChange={e => updateFormData('platformFeedback', e.target.value)}
+                        value={formData.monthlyInvestmentOther || ''}
+                        onChange={e => updateFormData('monthlyInvestmentOther', e.target.value)}
                         style={{ width: 180 }}
                       />
                     )}
